@@ -49,9 +49,11 @@ class ShortNoteOverviewByUserSerializer(serializers.ModelSerializer):
     
     def get_show_details(self, obj):
         if self.context['filter_type'] == "user":
+            # api to read short note created by logged user
             return f"http://127.0.0.1:8000/api/read-short-note/{obj.id}"
         else:
-            return f"http://127.0.0.1:8000/api/read-short-note/{obj.id}"
+            # api to read all short nots
+            return f"http://127.0.0.1:8000/api/read-all-short-note/{obj.id}"
 
 
 class ShortNoteUpdateSerializer(serializers.ModelSerializer):
