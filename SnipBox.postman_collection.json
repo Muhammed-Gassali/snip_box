@@ -1,0 +1,470 @@
+{
+	"info": {
+		"_postman_id": "66184abc-48e9-4ad5-a1f1-ff51e4d3c163",
+		"name": "SnipBox",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15373887",
+		"_collection_link": "https://martian-comet-732593.postman.co/workspace/rewards-dna~4efe1a08-551c-4ef3-885e-9a76750cb72e/collection/15373887-66184abc-48e9-4ad5-a1f1-ff51e4d3c163?action=share&source=collection_link&creator=15373887"
+	},
+	"item": [
+		{
+			"name": "create new user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"gassali\",\r\n    \"password\": \"haigassali\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/token/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"token",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "refresh token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/token/refresh/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"token",
+						"refresh",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-short-note",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4MTcwNTIzLCJpYXQiOjE3MzgxNzAyMjMsImp0aSI6ImNlOTdlNGVkMjgzYTRmODI5M2IzNGQ2N2Q3NTA0ZTUwIiwidXNlcl9pZCI6MX0.HNK5h2QxpmYT2vaXjFCoXxJUfP_zR5IXAtKJQSMQ2Wg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tag_title\": \"next\",\r\n    \"title\": \"nn\",\r\n    \"note\": \"n\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/create-short-note",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"create-short-note"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list-short-note-by-user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4MTg0MzE3LCJpYXQiOjE3MzgxODQwMTcsImp0aSI6ImJmMDc5YTQ4ZDNiNTQwYTRiY2E2ODE0OTVlYzU2MDVjIiwidXNlcl9pZCI6MX0.vdwftPgk5PkvdrttbcO9m-kJjT6LSs6K8kpfUloTIoE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/list-short-note-by-user",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"list-short-note-by-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patch-short-note",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4MTc5NzY3LCJpYXQiOjE3MzgxNzk0NjcsImp0aSI6ImQ5ODQ5ZDIwZWZjMzQ0NGU4MGU1ZmY0MmQ1ZTFjZWQ3IiwidXNlcl9pZCI6MX0.ANZWCv7zc3RMpR62FCNn6IDtMFajsYfaJJllGtJdJB0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tag_title\": \"Updated Tag Title new\",\r\n    \"title\": \"Updated Short Note Title\",\r\n    \"note\": \"Updated note content.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/patch-short-note/5",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"patch-short-note",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-short-note",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4MTc0MDcwLCJpYXQiOjE3MzgxNzM3NzAsImp0aSI6ImQwZTQwMmZjZWQ2ZjRhODA5NDc2MmY1NTJhMmI2ZWE3IiwidXNlcl9pZCI6MX0.n2IBjp_6PUtgHG0SqUBTUMreBVtLnUrHhJD8K_VQcug",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/delete-short-note/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"delete-short-note",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list-all-short-note",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4MTgwMDMwLCJpYXQiOjE3MzgxNzk3MzAsImp0aSI6IjFlZGQ0OTdhZDE5YjQ2M2JiYmZjYzk2NzliMzAyN2M3IiwidXNlcl9pZCI6MX0.B72ALHcOSMOQ2Nx81qy1b2BlzwIALXR0xyIeddGukEU",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/list-all-short-note",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"list-all-short-note"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list-short-note-by-tag-and-user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4MTgwNDUyLCJpYXQiOjE3MzgxODAxNTIsImp0aSI6IjAwODU0NTMzOTIwMDRjYzJhNmI3OGU5NGNiMjYxZmI3IiwidXNlcl9pZCI6MX0.WeQarG7HJ5vDoZk78_En9fY6sYNW2hAHsPdli3BE2JM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/list-short-note-by-tag-and-user/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"list-short-note-by-tag-and-user",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list-short-note-by-tag",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4MTgwNDUyLCJpYXQiOjE3MzgxODAxNTIsImp0aSI6IjAwODU0NTMzOTIwMDRjYzJhNmI3OGU5NGNiMjYxZmI3IiwidXNlcl9pZCI6MX0.WeQarG7HJ5vDoZk78_En9fY6sYNW2hAHsPdli3BE2JM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/list-short-note-by-tag/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"list-short-note-by-tag",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list-tag",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4MTgxMDg0LCJpYXQiOjE3MzgxODA3ODQsImp0aSI6IjI0NDYyNzc3ZTRjYjQ0NjJiMDgwMjI1YmFlMTI1MWFmIiwidXNlcl9pZCI6MX0.rsZf50hjQLbiV5kccOY65-8FBjAFFTgYVgfAviUHyk4",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/list-tag",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"list-tag"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "overview-short-note-by-user",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4MTgxOTEzLCJpYXQiOjE3MzgxODE2MTMsImp0aSI6IjVjYTdjYjlkMjkzNzQwZDI4MTI4ZGM5Y2Q1N2NkNDRkIiwidXNlcl9pZCI6MX0.r5c6GQHLMRPG665lz-UAbjDiOboMRdqOUPF3PUWgoD8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/overview-short-note-by-user",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"overview-short-note-by-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read-all-short-note",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4MTgzMjI2LCJpYXQiOjE3MzgxODI5MjYsImp0aSI6ImMwMjVkMzFjZjU3OTQ2NGM4NDIyMGY0ZWQyYThkYmI3IiwidXNlcl9pZCI6MX0.MNx1MUUUwk9VY-BF9AcPclhN68tXBAPsE3FxGTWoMXA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "read-all-short-note",
+					"host": [
+						"read-all-short-note"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "overview-all-short-notes",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4MTg2NjA3LCJpYXQiOjE3MzgxODYzMDcsImp0aSI6IjEwN2NkMzE5YjBhMzQ2ZjQ4YmRkYWNiMDI5YjgxYTNjIiwidXNlcl9pZCI6MX0.-8c9Ac7ZMsCbUHeSqbTaVWCc1FpuGc3bWyL6AigZ2js",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/overview-all-short-notes",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"overview-all-short-notes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read-short-note",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4MTg2NjA3LCJpYXQiOjE3MzgxODYzMDcsImp0aSI6IjEwN2NkMzE5YjBhMzQ2ZjQ4YmRkYWNiMDI5YjgxYTNjIiwidXNlcl9pZCI6MX0.-8c9Ac7ZMsCbUHeSqbTaVWCc1FpuGc3bWyL6AigZ2js",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/read-short-note/5",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"read-short-note",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
