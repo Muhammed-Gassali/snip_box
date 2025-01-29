@@ -37,7 +37,7 @@ class ShortNoteCreateView(generics.CreateAPIView):
         serializer.save(user=self.request.user)
 
    
-
+# class to list short note created by logged user
 class ListShortNotes(generics.ListAPIView):
     queryset = ShortNote.objects.all()
     serializer_class = ShortNoteListSerializer
@@ -45,8 +45,7 @@ class ListShortNotes(generics.ListAPIView):
 
     def get(self,request,**kwargs):
         try:
-            user=self.request.user
-            self.queryset = self.queryset.filter(user=user)
+            self.queryset = self.queryset.filter(user=self.request.user)
             response = super().get(request, **kwargs)
             return Response({'status':'success','response_code': status.HTTP_200_OK,'data':response.data})
         except Exception as e:
@@ -54,10 +53,98 @@ class ListShortNotes(generics.ListAPIView):
             return Response({'status': "failed",'response_code':status.HTTP_500_INTERNAL_SERVER_ERROR,'message':message})
 
 
-class UpdateShortNote(generics.UpdateAPIView):
+class ListShortNoteByTagAndUser(generics.ListAPIView):
+    queryset = ShortNote.objects.all()
+    serializer_class = ShortNoteListSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, **kwargs):
+        self.queryset = self.queryset.filter(user=self.request.user,tag_relation=kwargs['tag_id'])
+        response = super().get(request, **kwargs)
+        return Response({'status':'success','response_code': status.HTTP_200_OK,'data':response.data})
+
+class ListShortNoteByTag(generics.ListAPIView):
+    queryset = ShortNote.objects.all()
+    serializer_class = ShortNoteListSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, **kwargs):
+        self.queryset = self.queryset.filter(tag_relation=kwargs['tag_id'])
+        response = super().get(request, **kwargs)
+        return Response({'status':'success','response_code': status.HTTP_200_OK,'data':response.data})
+
+
+class OverviewShortNoteByUser(generics.ListAPIView):
+    queryset = ShortNote.objects.all().select_related('user','tag_relation')
+    serializer_class = ShortNoteOverviewByUserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['filter_type'] = 'user'
+        return context
+
+    def get(self, request, **kwargs):
+        self.queryset = self.queryset.filter(user=self.request.user)
+        response = super().get(request, **kwargs)
+        return Response({'status':'success','response_code': status.HTTP_200_OK,'data':response.data})
+
+
+class OverviewAllShortNote(generics.ListAPIView):
+    queryset = ShortNote.objects.all().select_related('user','tag_relation')
+    serializer_class = ShortNoteOverviewByUserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['filter_type'] = 'non_user'  # Example of custom context
+        return context
+
+    def get(self, request, **kwargs):
+        response = super().get(request, **kwargs)
+        return Response({'status':'success','response_code': status.HTTP_200_OK,'data':response.data})
+
+
+class ListTag(generics.ListAPIView):
+    queryset = Tag.objects.all()
+    serializer_class = TagListSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, **kwargs):
+        response = super().get(request, **kwargs)
+        return Response({'status':'success','response_code': status.HTTP_200_OK,'data':response.data})
+
+
+class ListShortAllNotes(generics.ListAPIView):
+    queryset = ShortNote.objects.all()
+    serializer_class = ShortNoteListSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class ReadUpdateShortNote(generics.RetrieveUpdateAPIView):
     queryset = ShortNote.objects.all()
     serializer_class = ShortNoteUpdateSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        return ShortNote.objects.filter(user=self.request.user)
+        return self.queryset.filter(user=self.request.user)
+
+
+
+
+class ShortNoteDeleteView(generics.DestroyAPIView):
+    queryset = ShortNote.objects.all()
+    serializer_class = ShortNoteUpdateSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        """Ensure users can only delete their own notes"""
+        return self.queryset.filter(user=self.request.user)
+
+    def delete(self, request, *args, **kwargs):
+        """Delete the instance and return the updated list of notes"""
+        instance = self.get_object() 
+        self.perform_destroy(instance)
+        remaining_notes = self.get_queryset()
+        serializer = self.get_serializer(remaining_notes, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

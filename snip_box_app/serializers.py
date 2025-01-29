@@ -21,9 +21,37 @@ class ShortNoteSerializer(serializers.ModelSerializer):
 
 
 class ShortNoteListSerializer(serializers.ModelSerializer):
+    tag_title = serializers.SerializerMethodField()
+    user_name = serializers.SerializerMethodField()
     class Meta:
         model = ShortNote
         exclude = ['tag_relation','user']
+
+    def get_user_name(self, obj):
+        return obj.user.username if obj.user else None
+    def get_tag_title(self, obj):
+        return obj.tag_relation.title if obj.tag_relation else None
+
+
+class ShortNoteOverviewByUserSerializer(serializers.ModelSerializer):
+    tag_title = serializers.SerializerMethodField()
+    user_name = serializers.SerializerMethodField()
+    show_details = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = ShortNote
+        exclude = ['tag_relation','user']
+
+    def get_user_name(self, obj):
+        return obj.user.username if obj.user else None
+    def get_tag_title(self, obj):
+        return obj.tag_relation.title if obj.tag_relation else None
+    
+    def get_show_details(self, obj):
+        if self.context['filter_type'] == "user":
+            return f"http://127.0.0.1:8000/api/read-short-note/{obj.id}"
+        else:
+            return f"http://127.0.0.1:8000/api/read-short-note/{obj.id}"
 
 
 class ShortNoteUpdateSerializer(serializers.ModelSerializer):
@@ -32,7 +60,7 @@ class ShortNoteUpdateSerializer(serializers.ModelSerializer):
     user_name = serializers.SerializerMethodField()
     class Meta:
         model = ShortNote
-        fields = ['tag_title', 'title', 'note','show_tag_title','created_at','updated_at','user_name']
+        fields = ['id','tag_title', 'title', 'note','show_tag_title','created_at','updated_at','user_name']
 
     def get_user_name(self, obj):
         return obj.user.username if obj.user else None
@@ -49,4 +77,7 @@ class ShortNoteUpdateSerializer(serializers.ModelSerializer):
         return instance
 
 
-        
+class TagListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = "__all__"
