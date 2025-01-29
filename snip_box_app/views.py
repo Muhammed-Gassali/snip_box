@@ -1,4 +1,6 @@
-from django.http import HttpResponse
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-def home(request):
-    return HttpResponse("Hello, Django App!")
+class Test(APIView):
+    def get(self, request):
+        return Response("Test intiated")
